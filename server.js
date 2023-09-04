@@ -4,22 +4,18 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 
 
-const dbURL = process.env.MONGODB_URI;
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 
-mongoose.connect(dbURL, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+}).then(() => console.log('З\'єднання з базою даних встановлено')).catch((err) => console.log('Помилка з\'єднання з базою даних', err));
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Помилка з\'єднання з базою даних:'));
-db.once('open', () => {
-  console.log('З\'єднання з базою даних встановлено');
-});
+
 
 
 app.use('/api/orders', require('./orderRoute'));
