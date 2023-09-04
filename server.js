@@ -4,7 +4,7 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 
 
-const dbURL = 'mongodb+srv://tarastelyk:qcLujRZvkmkSj2m5@cluster0.kfmatdr.mongodb.net/airtexorders?retryWrites=true&w=majority';
+const dbURL = process.env.MONGODB_URI;
 const app = express();
 app.use(cors());
 app.use(express.json());
